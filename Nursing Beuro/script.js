@@ -1,32 +1,62 @@
-let hamburger = document.querySelector("#menu-icon");
-let nav = document.querySelector(".nav-links");
-let navigation = document.querySelectorAll(".nav-links a");
-let closenav = document.querySelector("#close");
+document.addEventListener("DOMContentLoaded", function () {
 
+    const hamburger = document.querySelector("#menu-icon");
+    const nav = document.querySelector(".nav-links");
+    const closeBtn = document.querySelector("#close");
+    const navLinks = document.querySelectorAll(".nav-links a");
 
-hamburger.addEventListener('click',function () {
-   if(nav.style.display = "none"){
-         nav.style.display = "flex"
-      closenav.style.display = "flex"
-      hamburger.style.display = "none"
-   }
-})
+    if (!hamburger || !nav) return; // Safety check
 
-closenav.addEventListener("click",function () {
-      if(nav.style.display = "flex"){
-      closenav.style.display = "none"
-      hamburger.style.display = "flex"
-      nav.style.display = "none"
-   }
-    
-})
+    // Check Mobile Screen
+    const isMobile = () => window.innerWidth <= 968;
 
-navigation.forEach(function (click) {
-    click.addEventListener("click",function () {
-    nav.style.display = "none";
-    closenav.style.display = "none";
-    hamburger.style.display = "flex";
-        
-    })
-    
-})
+    // Open Menu
+    const openNav = () => {
+        nav.classList.add("active");
+        closeBtn?.classList.add("active");
+        hamburger.classList.add("hidden");
+    };
+
+    // Close Menu
+    const closeNav = () => {
+        nav.classList.remove("active");
+        closeBtn?.classList.remove("active");
+        hamburger.classList.remove("hidden");
+    };
+
+    // Toggle Menu
+    const toggleNav = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!isMobile()) return;
+
+        nav.classList.contains("active") ? closeNav() : openNav();
+    };
+
+    // Events
+    hamburger.addEventListener("click", toggleNav);
+    closeBtn?.addEventListener("click", closeNav);
+
+    // Close on Nav Link Click
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            if (isMobile()) closeNav();
+        });
+    });
+
+    // Close on Scroll (Mobile Only)
+    window.addEventListener("scroll", () => {
+        if (isMobile() && nav.classList.contains("active")) {
+            closeNav();
+        }
+    });
+
+    // Reset on Resize
+    window.addEventListener("resize", () => {
+        if (!isMobile()) {
+            closeNav();
+        }
+    });
+
+});

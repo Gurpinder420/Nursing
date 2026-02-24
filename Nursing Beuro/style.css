@@ -183,10 +183,11 @@ body {
 
 #menu-icon {
     display: none;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     color: #2A5C7F;
     cursor: pointer;
     transition: transform 0.3s;
+    margin-right: 5px;
 }
 #close{
     display: none;
@@ -195,6 +196,12 @@ body {
 
 #menu-icon:hover {
     transform: scale(1.1);
+}
+
+.mobile-menu-btn {
+    display: none;
+    gap: 1rem;
+    align-items: center;
 }
 
 /* ===== HERO SECTION ===== */
@@ -291,13 +298,24 @@ body {
 
 .hero-buttons {
     display: flex;
+    /* justify-content: center;
+    align-items: center;
+    text-align: start; */
+    /* background-color: #0d4f68; */
     gap: 1.5rem;
     animation: fadeInUp 1s ease 0.4s both;
+   
+}
+.hero-buttons a
+{
+     /* border: 2px solid red; */
+     text-decoration: none;
 }
 
 .btn {
     padding: 1.2rem 3rem;
     border-radius: 50px;
+    background-color: red;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
@@ -305,6 +323,7 @@ body {
     position: relative;
     overflow: hidden;
     display: inline-block;
+    
 }
 
 .btn::before {
@@ -325,7 +344,14 @@ body {
 .btn-primary {
     background: linear-gradient(135deg, #2A5C7F, #4ECDC4);
     color: white;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: inline-block;
     box-shadow: 0 10px 25px rgba(42, 92, 127, 0.3);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .btn-primary:hover {
@@ -336,6 +362,14 @@ body {
 .btn-secondary {
     background: linear-gradient(135deg, #2A5C7F, #4ECDC4);
     color: white;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: inline-block;
+    box-shadow: 0 10px 25px rgba(42, 92, 127, 0.3);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .btn-secondary:hover {
@@ -1845,18 +1879,53 @@ body {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media screen and (max-width: 968px) {
-    /* Navigation */
-    #menu-icon {
+/* Desktop Navigation */
+@media screen and (min-width: 969px) {
+    .nav-links {
         display: flex;
-        font-size: 25px;
     }
-    #close{
+    
+    .mobile-menu-btn {
         display: none;
     }
     
-    .nav-links {
+    #menu-icon {
         display: none;
+    }
+    
+    #close {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    /* Navigation */
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    #menu-icon {
+        display: flex;
+        font-size: 25px;
+        cursor: pointer;
+    }
+    
+    #menu-icon.hidden {
+        display: none !important;
+    }
+    
+    #close {
+        display: none;
+        cursor: pointer;
+        font-size: 25px;
+    }
+    
+    #close.active {
+        display: flex !important;
+    }
+    
+    .nav-links {
+        display: none !important;
         position: absolute;
         flex-direction: column;
         top: 100%;
@@ -1869,12 +1938,14 @@ body {
     }
     
     .nav-links.active {
-        display: flex;
+        display: flex !important;
     }
     
     .nav-links a {
         color: white;
         font-size: 20px;
+        padding: 12px 20px;
+        text-decoration: none;
     }
     
     /* Hero Section */
@@ -1998,10 +2069,14 @@ body {
 }
 
 @media screen and (max-width: 480px) {
+   
     .navbar {
         padding: 0.5rem 5%;
     }
-    
+    .hero
+    {
+       
+    }
     .logo {
         font-size: 1.5rem;
     }
